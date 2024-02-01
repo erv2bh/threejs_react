@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Canvas } from "react-three-fiber";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <div id="container">
+      <div className="aim"></div>
+      <Canvas camera={{ fov: 45 }}>
+        <App />
+      </Canvas>
+    </div>
   </React.StrictMode>
 );
 
