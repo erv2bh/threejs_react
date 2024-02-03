@@ -12,7 +12,7 @@ const sideVector = new THREE.Vector3();
 
 export const Player = () => {
   const playerRef = useRef();
-  const { forward, backward, left, right, jump } = usePersonControls();
+  // const { forward, backward, left, right, jump } = usePersonControls();
 
   const rapier = useRapier();
 
@@ -22,8 +22,8 @@ export const Player = () => {
     //moving player
     const velocity = playerRef.current.linvel();
 
-    frontVector.set(0, 0, backward - forward);
-    sideVector.set(left - right, 0, 0);
+    // frontVector.set(0, 0, backward - forward);
+    // sideVector.set(left - right, 0, 0);
     direction
       .subVectors(frontVector, sideVector)
       .normalize()
@@ -36,28 +36,29 @@ export const Player = () => {
       y: velocity.y,
       z: direction.z,
     });
+    console.log(direction);
 
     //jumping
-    const world = rapier.world;
-    const ray = world.castRay(
-      new RAPIER.Ray(playerRef.current.translation(), { x: 0, y: -1, z: 0 }),
-    );
-    const grounded = ray && ray.collider && Math.abs(ray.toi) <= 1.5;
+    // const world = rapier.world;
+    // const ray = world.castRay(
+    //   new RAPIER.Ray(playerRef.current.translation(), { x: 0, y: -1, z: 0 }),
+    // );
+    // const grounded = ray && ray.collider && Math.abs(ray.toi) <= 1.5;
 
-    if (jump && grounded) doJump();
+    // if (jump && grounded) doJump();
 
     const { x, y, z } = playerRef.current.translation();
     state.camera.position.set(x, y, z);
   });
 
-  const doJump = () => {
-    playerRef.current.setLinvel({ x: 0, y: 8, z: 0 });
-  };
+  // const doJump = () => {
+  //   playerRef.current.setLinvel({ x: 0, y: 8, z: 0 });
+  // };
 
   return (
     <>
       <RigidBody colliders={false} mass={1} ref={playerRef} lockRotations>
-        <mesh>
+        <mesh position={[0, 0, -50]}>
           <capsuleGeometry args={[0.5, 0.5]} />
           <CapsuleCollider args={[0.5, 0.5]} />
         </mesh>

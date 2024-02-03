@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
     <div id="container">
       <div className="aim"></div>
-      <Canvas camera={{ fov: 45 }}>
+      <Canvas camera={{near:0.1, far: 1000, position: [25, 10, 30], fov: 75 }}>
         <App />
       </Canvas>
     </div>
